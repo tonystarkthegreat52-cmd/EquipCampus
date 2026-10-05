@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EquipCampus — Equipment Borrowing System</title>
+<style>
+:root{--navy:#102a43;--blue:#1769e0;--blue2:#eaf2ff;--bg:#f6f8fb;--card:#fff;--text:#172b4d;--muted:#667085;--line:#e4e7ec;--green:#16824b;--greenbg:#e9f8f0;--red:#c93636;--redbg:#fff0f0;--amber:#a15c00;--amberbg:#fff5df;--violet:#6d43b5;--violetbg:#f2ecff;--shadow:0 8px 28px rgba(16,42,67,.07)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.auth{min-height:100vh;display:grid;grid-template-columns:52% 48%;background:#fff}.auth-visual{background:linear-gradient(145deg,#102a43,#164e86);color:white;padding:46px 8%;position:relative;overflow:hidden}.auth-visual:after{content:"";position:absolute;width:500px;height:500px;border:1px solid rgba(255,255,255,.13);border-radius:50%;right:-220px;bottom:-180px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px}.brand-mark{width:39px;height:39px;border-radius:11px;background:#fff;color:var(--blue);display:grid;place-items:center;font-weight:900}.auth-copy{max-width:560px;margin:18vh auto 0}.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.12em;opacity:.8}.auth-copy h1{font-size:48px;line-height:1.08;margin:16px 0}.auth-copy p{font-size:17px;line-height:1.65;color:#d8e7f7}.visual-card{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);padding:15px;border-radius:14px;margin-top:18px;max-width:360px}.visual-card b,.visual-card span{display:block}.visual-card span{font-size:13px;color:#c9d9ea;margin-top:4px}.auth-foot{position:absolute;bottom:30px;font-size:12px;color:#b9cce0}.auth-panel{display:flex;align-items:center;justify-content:center;padding:40px}.auth-form{width:min(420px,100%)}.auth-head{margin-bottom:25px}.role{display:inline-block;background:var(--blue2);color:var(--blue);font-weight:700;font-size:12px;padding:7px 10px;border-radius:20px}.role.admin{background:#f1ebff;color:var(--violet)}.auth-head h2{font-size:31px;margin:13px 0 7px}.auth-head p{color:var(--muted);margin:0}.field{display:block;margin:16px 0}.field>span{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input,.field select,.field textarea,.search{width:100%;border:1px solid #d6dae1;border-radius:9px;padding:11px 12px;outline:none;background:#fff}.field textarea{min-height:100px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #eaf2ff}.auth-options{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin:12px 0}.text-btn{background:none;border:0;color:var(--blue);font-weight:700;padding:0}.btn{border:0;border-radius:9px;padding:10px 15px;background:var(--blue);color:white;font-weight:700}.btn.secondary{background:white;color:var(--text);border:1px solid #d8dde5}.btn.danger{background:var(--red)}.btn.ghost{background:transparent;color:var(--blue);padding:7px 9px}.btn.full{width:100%;padding:12px}.divider{display:flex;align-items:center;gap:10px;margin:22px 0;color:#98a2b3;font-size:12px}.divider:before,.divider:after{content:"";height:1px;background:var(--line);flex:1}.switch{text-align:center;color:var(--muted);font-size:13px}.portal{width:100%;border:0;background:none;color:var(--muted);display:flex;justify-content:center;gap:8px;margin-top:22px}.demo{font-size:12px;color:var(--muted);margin-top:14px;text-align:center}
+.app{min-height:100vh}.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;background:#fff;border-right:1px solid var(--line);padding:22px 15px;z-index:20}.side-brand{padding:0 8px 26px}.side-brand small{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-top:2px}.nav-label{font-size:10px;color:#98a2b3;text-transform:uppercase;letter-spacing:.1em;padding:0 12px}.nav-item{width:100%;border:0;background:none;display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:8px;color:#52606d;text-align:left;margin:3px 0}.nav-item.active{background:var(--blue2);color:var(--blue);font-weight:700}.nav-item em{margin-left:auto;background:#ffe7e7;color:var(--red);font-style:normal;border-radius:20px;padding:2px 7px;font-size:11px}.main{margin-left:250px}.topbar{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:flex-end;padding:0 30px;gap:20px}.profile-mini{display:flex;align-items:center;gap:10px}.avatar{width:35px;height:35px;border-radius:50%;background:#dce9ff;color:var(--blue);display:grid;place-items:center;font-size:12px;font-weight:800}.content{padding:32px;max-width:1500px;margin:auto}.page-title{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:24px}.page-title h1{font-size:28px;margin:0 0 6px}.page-title p{margin:0;color:var(--muted);font-size:14px}.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,1fr)}.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:19px;box-shadow:var(--shadow)}.stat .label{font-size:12px;color:var(--muted)}.stat strong{font-size:28px;display:block;margin:7px 0}.stat small{color:var(--muted)}.section{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:var(--shadow);margin-top:20px}.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.section h2{font-size:17px;margin:0}.section p{font-size:13px;color:var(--muted);margin:5px 0}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:700px}.table th,.table td{text-align:left;padding:13px 12px;border-bottom:1px solid #eef0f3;font-size:13px;vertical-align:middle}.table th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#667085;background:#fafbfc}.badge{display:inline-block;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:800}.badge.AVAILABLE,.badge.RETURNED,.badge.APPROVED{background:var(--greenbg);color:var(--green)}.badge.PENDING,.badge.BORROWED{background:var(--amberbg);color:var(--amber)}.badge.OVERDUE,.badge.REJECTED,.badge.UNAVAILABLE{background:var(--redbg);color:var(--red)}.cards{grid-template-columns:repeat(3,1fr)}.equipment-card{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}.thumb{height:135px;background:linear-gradient(135deg,#eef5ff,#dbe9ff);display:grid;place-items:center;font-size:55px;color:var(--blue)}.equipment-body{padding:16px}.equipment-body h3{font-size:16px;margin:9px 0 5px}.equipment-body p{color:var(--muted);font-size:12px;min-height:35px}.equipment-body .actions{display:flex;gap:8px;margin-top:14px}.filterbar{display:grid;grid-template-columns:1fr 180px 180px;gap:10px;margin-bottom:16px}.tabs{display:flex;gap:7px;margin-bottom:14px}.tabs button,.pills button{border:1px solid var(--line);background:white;border-radius:20px;padding:8px 13px;color:var(--muted)}.tabs button.active,.pills button.active{background:var(--blue);border-color:var(--blue);color:white}.notice{padding:16px;border-radius:11px;display:flex;gap:13px;align-items:flex-start;margin-bottom:16px;background:#edf5ff}.notice b{font-size:13px}.notice p{margin:4px 0 0;color:var(--muted);font-size:12px}.form-layout{display:grid;grid-template-columns:1.3fr .7fr;gap:20px}.form-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;box-shadow:var(--shadow)}.readonly{padding:11px;border:1px solid var(--line);border-radius:9px;background:#f8fafc}.readonly small{float:right;color:var(--muted)}.summary{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;height:max-content}.summary h3{margin-top:0}.detail{display:grid;grid-template-columns:45% 55%;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.detail-img{min-height:420px;background:linear-gradient(145deg,#eaf2ff,#d7e6ff);display:grid;place-items:center;font-size:120px;color:var(--blue)}.detail-info{padding:35px}.detail-info h1{font-size:31px;margin:8px 0}.detail-info p{color:var(--muted);line-height:1.6}.specs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}.specs div{padding:12px;background:#f8fafc;border-radius:8px}.specs span,.specs b{display:block}.specs span{font-size:11px;color:var(--muted);margin-bottom:4px}.overdue{background:#fff0f0;border:1px solid #ffd2d2;border-radius:12px;padding:22px;display:flex;gap:16px;align-items:center}.overdue h2{margin:0 0 5px}.danger{color:var(--red)}.profile{display:grid;grid-template-columns:280px 1fr;gap:18px}.profile-card{text-align:center}.profile-big{width:88px;height:88px;border-radius:50%;background:#dce9ff;color:var(--blue);display:grid;place-items:center;font-size:25px;font-weight:800;margin:0 auto 12px}.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.info-grid span{font-size:11px;color:var(--muted);display:block}.info-grid b{display:block;margin-top:5px}.settings{display:grid;grid-template-columns:1fr 1fr;gap:18px}.toggle{display:flex;justify-content:space-between;gap:15px;padding:15px 0;border-bottom:1px solid var(--line)}.toggle b,.toggle span{display:block}.toggle span{font-size:12px;color:var(--muted);margin-top:4px}.logs-dot{width:9px;height:9px;border-radius:50%;background:var(--blue);display:inline-block}.toast{position:fixed;right:25px;bottom:25px;background:#102a43;color:white;padding:13px 18px;border-radius:9px;box-shadow:var(--shadow);z-index:99}.modal-back{position:fixed;inset:0;background:rgba(10,20,30,.45);display:grid;place-items:center;z-index:90}.modal{background:white;border-radius:13px;width:min(520px,92%);padding:22px}.modal-head{display:flex;justify-content:space-between}.modal-head h2{margin:0}.close{border:0;background:none;font-size:22px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}.mobile-menu{display:none}
+
+@media(max-width:1000px){.auth{grid-template-columns:1fr}.auth-visual{display:none}.sidebar{transform:translateX(-100%);transition:.2s}.sidebar.open{transform:none}.main{margin-left:0}.mobile-menu{display:block;border:0;background:none;font-size:24px;margin-right:auto}.stats{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}.form-layout,.detail,.profile,.settings{grid-template-columns:1fr}.detail-img{min-height:240px}.topbar{justify-content:flex-end}}
+@media(max-width:620px){.content{padding:20px 14px 40px}.topbar{padding:0 14px}.stats,.cards{grid-template-columns:1fr}.filterbar{grid-template-columns:1fr}.page-title{flex-direction:column}.page-title .btn{width:100%}.auth-panel{padding:25px 18px}.info-grid,.specs{grid-template-columns:1fr}.detail-info{padding:22px}.detail-info h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const KEY="equipcampus_single_html_v1";
+
+const seed={
+ users:[
+  {id:"USR-001",name:"Juan Dela Cruz",studentId:"2026-00124",email:"juan.delacruz@university.edu",password:"student123",phone:"+63 912 345 6789",role:"USER",status:"Active"},
+  {id:"USR-002",name:"Maria Santos",studentId:"2025-00491",email:"maria.santos@university.edu",password:"student123",phone:"+63 913 222 1000",role:"USER",status:"Active"},
+  {id:"ADM-001",name:"Alex Rivera",studentId:"—",email:"admin@university.edu",password:"admin123",phone:"",role:"ADMIN",status:"Active"},
+  {id:"USR-003",name:"Paolo Reyes",studentId:"2026-00216",email:"paolo.reyes@university.edu",password:"student123",phone:"",role:"USER",status:"Inactive"}
+ ],
+ equipment:[
+  {id:"EQ-001",name:"Dell Latitude 5440",category:"Computers",condition:"Good",status:"AVAILABLE",icon:"▣",description:"Business laptop suitable for presentations, programming, research, and academic work."},
+  {id:"EQ-002",name:"Epson EB-X06 Projector",category:"Audio Visual",condition:"Good",status:"BORROWED",icon:"▤",description:"Portable classroom projector for presentations, seminars, and campus events."},
+  {id:"EQ-003",name:"Canon EOS 250D Camera",category:"Multimedia",condition:"Good",status:"AVAILABLE",icon:"◉",description:"Digital camera for campus publication, documentation, and approved multimedia projects."},
+  {id:"EQ-004",name:"JBL EON One Speaker",category:"Audio Visual",condition:"Fair",status:"UNAVAILABLE",icon:"◧",description:"Portable PA system for approved campus events and presentations."},
+  {id:"EQ-005",name:"Casio Scientific Calculator",category:"Academic",condition:"Good",status:"AVAILABLE",icon:"▦",description:"Scientific calculator suitable for engineering and mathematics coursework."},
+  {id:"EQ-006",name:"Tripod Stand Pro",category:"Multimedia",condition:"Good",status:"AVAILABLE",icon:"△",description:"Adjustable aluminum tripod for cameras and mobile recording devices."}
+ ],
+ requests:[
+  {id:"BR-001",userId:"USR-001",borrower:"Juan Dela Cruz",equipmentId:"EQ-001",equipment:"Dell Latitude 5440",purpose:"Class presentation",borrow:"2026-10-07",due:"2026-10-10",status:"PENDING",created:"2026-10-05"},
+  {id:"BR-002",userId:"USR-002",borrower:"Maria Santos",equipmentId:"EQ-002",equipment:"Epson EB-X06 Projector",purpose:"Organization seminar",borrow:"2026-10-01",due:"2026-10-03",status:"OVERDUE",created:"2026-09-30"}
+ ],
+ history:[
+  {id:"TX-1042",userId:"USR-001",borrower:"Juan Dela Cruz",equipment:"Dell Latitude Laptop",equipmentId:"EQ-001",borrow:"2026-10-01",due:"2026-10-03",returned:"2026-10-03",condition:"Good",status:"RETURNED"},
+  {id:"TX-1041",userId:"USR-002",borrower:"Maria Santos",equipment:"Digital Camera",equipmentId:"EQ-003",borrow:"2026-09-28",due:"2026-10-01",returned:"2026-10-01",condition:"Good",status:"RETURNED"}
+ ],
+ logs:[
+  ["Oct 5, 2026 08:30 AM","Juan Dela Cruz","USER","Borrow Request","Requested Dell Latitude 5440"],
+  ["Oct 5, 2026 09:10 AM","Alex Rivera","ADMIN","Request Approved","Approved request #BR-001"],
+  ["Oct 5, 2026 09:15 AM","System","SYSTEM","Overdue Detection","Epson Projector marked as OVERDUE"],
+  ["Oct 5, 2026 10:02 AM","Maria Santos","USER","Account Login","Signed in from campus network"]
+ ],
+ settings:{maxDays:7,maxItems:3,autoOverdue:true}
+};
+
+function load(){
+ let raw=localStorage.getItem(KEY);
+ if(!raw){localStorage.setItem(KEY,JSON.stringify(seed));return structuredClone(seed)}
+ try{return JSON.parse(raw)}catch(e){localStorage.setItem(KEY,JSON.stringify(seed));return structuredClone(seed)}
+}
+let db=load(), session=JSON.parse(localStorage.getItem(KEY+"_session")||"null"), page="dashboard", toastTimer;
+
+function save(){localStorage.setItem(KEY,JSON.stringify(db))}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function date(s){if(!s)return "—";return new Date(s+"T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}
+function initials(n){return n.split(" ").map(x=>x[0]).slice(0,2).join("").toUpperCase()}
+function badge(s){return `<span class="badge ${s}">${s}</span>`}
+function notify(m){clearTimeout(toastTimer);document.querySelector(".toast")?.remove();let d=document.createElement("div");d.className="toast";d.textContent=m;document.body.appendChild(d);toastTimer=setTimeout(()=>d.remove(),3000)}
+function icon(x){const a={dashboard:"▦",equipment:"▣",requests:"☷",overdue:"△",history:"↺",user:"●",users:"◉",return:"↩",logs:"≡",settings:"⚙",logout:"↪",check:"✓",search:"⌕",arrow:"→"};return `<span aria-hidden="true">${a[x]||"•"}</span>`}
+function currentUser(){return session?db.users.find(u=>u.id===session.userId):null}
+function overdueRequests(){return db.requests.filter(r=>r.status==="OVERDUE" || (r.status==="APPROVED"&&new Date(r.due+"T23:59:59")<new Date()))}
+
+function render(){
+ if(!session){renderAuth("login");return}
+ const u=currentUser(); if(!u){session=null;localStorage.removeItem(KEY+"_session");renderAuth("login");return}
+ renderApp(u)
+}
+function renderAuth(screen){
+ document.getElementById("root").innerHTML=`<div class="auth">
+ <section class="auth-visual"><div class="brand"><span class="brand-mark">${icon("equipment")}</span>EquipCampus</div>
+ <div class="auth-copy"><span class="kicker">Borrow smarter. Return responsibly.</span><h1>Campus resources,<br>ready when you are.</h1><p>A secure and transparent way for the campus community to access, track, and care for shared equipment.</p>
+ <div class="visual-card">${icon("equipment")}<div><b>50+ campus resources</b><span>Available across departments</span></div></div>
+ <div class="visual-card"><b>●</b><div><b>Automatic due-date tracking</b><span>Always know what needs attention</span></div></div></div>
+ <p class="auth-foot">CARD - MRI Development Institute Inc.</p></section>
+ <section class="auth-panel"><div class="auth-form">
+ <div class="auth-head"><span class="role ${screen==="admin"?"admin":""}">${screen==="admin"?"Administrator portal":"Student portal"}</span>
+ <h2>${screen==="register"?"Create your account":screen==="admin"?"Administrator Login":"Welcome back"}</h2>
+ <p>${screen==="register"?"Use your official campus information to register.":"Enter your credentials to continue to the system."}</p></div>
+ <form id="authForm">
+ ${screen==="register"?`<div class="field"><span>Full Name</span><input name="name" placeholder="e.g. Juan Dela Cruz" required></div><div class="field"><span>Student ID</span><input name="studentId" placeholder="2026-00124" required></div>`:""}
+ <div class="field"><span>${screen==="admin"?"Username or Email":"Email"}</span><input name="email" type="${screen==="admin"?"text":"email"}" placeholder="${screen==="admin"?"admin@university.edu":"juan.delacruz@university.edu"}" required></div>
+ <div class="field"><span>Password</span><input name="password" type="password" placeholder="Enter your password" required></div>
+ ${screen==="register"?`<div class="field"><span>Confirm Password</span><input name="confirm" type="password" required></div>`:""}
+ <button class="btn full" type="submit">${screen==="register"?"Create Account":"Login"}</button></form>
+ ${screen==="login"?`<div class="divider"><span>or</span></div><button class="btn secondary full" onclick="demo('user')">Use demo student account</button>`:""}
+ <p class="switch">${screen==="register"?"Already have an account? ":"New to EquipCampus? "}<button class="text-btn" onclick="renderAuth('${screen==="register"?"login":"register"}')">${screen==="register"?"Login":"Create Account"}</button></p>
+ <button class="portal" onclick="renderAuth('${screen==="admin"?"login":"admin"}')">${icon(screen==="admin"?"user":"settings")} ${screen==="admin"?"Return to student portal":"Go to administrator portal"} ${icon("arrow")}</button>
+ <p class="demo">Demo student: juan.delacruz@university.edu / student123<br>Demo admin: admin@university.edu / admin123</p>
+ </div></section></div>`;
+ document.getElementById("authForm").onsubmit=e=>{e.preventDefault();authSubmit(new FormData(e.target),screen)}
+}
+function authSubmit(f,screen){
+ const email=String(f.get("email")||"").trim().toLowerCase(), pass=String(f.get("password")||"");
+ if(screen==="register"){
+  if(pass!==f.get("confirm"))return notify("Passwords do not match.");
+  if(db.users.some(u=>u.email.toLowerCase()===email))return notify("An account with this email already exists.");
+  const u={id:"USR-"+String(Date.now()).slice(-6),name:f.get("name"),studentId:f.get("studentId"),email,password:pass,phone:"",role:"USER",status:"Active"};
+  db.users.push(u);save();session={userId:u.id};localStorage.setItem(KEY+"_session",JSON.stringify(session));page="dashboard";render();notify("Account created successfully.");return;
+ }
+ const u=db.users.find(x=>(x.email.toLowerCase()===email)&&x.password===pass&&x.role===(screen==="admin"?"ADMIN":"USER"));
+ if(!u)return notify("Invalid credentials. Try the demo account shown below.");
+ if(u.status!=="Active")return notify("This account is inactive.");
+ session={userId:u.id};localStorage.setItem(KEY+"_session",JSON.stringify(session));page="dashboard";render()
+}
+function demo(role){const u=db.users.find(x=>x.role===role.toUpperCase());session={userId:u.id};localStorage.setItem(KEY+"_session",JSON.stringify(session));page="dashboard";render()}
+
+function renderApp(u){
+ const admin=u.role==="ADMIN";
+ const nav=admin?[
+  ["dashboard","Dashboard"],["equipment","Equipment"],["users","Users"],["borrow-requests","Borrow Requests"],["borrowed-equipment","Borrowed Equipment"],["overdue-equipment","Overdue Equipment"],["returns","Returns"],["history","History"],["activity-logs","Activity Logs"],["settings","Settings"]
+ ]:[
+  ["dashboard","Dashboard"],["equipment","Equipment"],["my-borrowings","My Borrowings"],["overdue","Overdue"],["history","History"],["profile","Profile"]
+ ];
+ const active=nav.find(x=>x[0]===page);
+ document.getElementById("root").innerHTML=`<div class="app"><aside class="sidebar" id="sidebar">
+ <div class="brand side-brand"><span class="brand-mark">${icon("equipment")}</span><div>EquipCampus<small>${admin?"Administration":"Student Portal"}</small></div></div>
+ <p class="nav-label">Workspace</p>${nav.map(n=>`<button class="nav-item ${page===n[0]?"active":""}" onclick="go('${n[0]}')">${icon(n[0].includes("request")?"requests":n[0].includes("overdue")?"overdue":n[0])}<span>${n[1]}</span>${n[0].includes("overdue")&&overdueRequests().length?`<em>${overdueRequests().length}</em>`:""}</button>`).join("")}
+ <button class="nav-item" onclick="logout()">${icon("logout")}<span>Logout</span></button>
+ </aside><main class="main"><header class="topbar"><button class="mobile-menu" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button><div class="profile-mini"><div class="avatar">${initials(u.name)}</div><div><b style="font-size:13px">${esc(u.name)}</b><div style="font-size:11px;color:#667085">${admin?"Administrator":"Borrower"}</div></div></div></header>
+ <div class="content" id="content"></div></main></div>`;
+ renderPage(u)
+}
+function go(p){page=p;render()}
+function logout(){session=null;localStorage.removeItem(KEY+"_session");page="dashboard";render()}
+
+function title(t,s,action=""){return `<div class="page-title"><div><h1>${t}</h1><p>${s}</p></div>${action}</div>`}
+function renderPage(u){
+ const c=document.getElementById("content"), admin=u.role==="ADMIN";
+ if(page==="dashboard")c.innerHTML=admin?adminDashboard():userDashboard(u);
+ else if(page==="equipment")c.innerHTML=equipmentPage(admin);
+ else if(page.startsWith("detail:"))c.innerHTML=detailPage(page.split(":")[1]);
+ else if(page.startsWith("request:"))c.innerHTML=requestPage(page.split(":")[1],u);
+ else if(page==="my-borrowings")c.innerHTML=myBorrowings(u);
+ else if(page==="overdue")c.innerHTML=userOverdue(u);
+ else if(page==="history")c.innerHTML=historyPage(u);
+ else if(page==="profile")c.innerHTML=profilePage(u);
+ else if(page==="users")c.innerHTML=usersPage();
+ else if(page==="borrow-requests")c.innerHTML=requestsPage();
+ else if(page==="borrowed-equipment")c.innerHTML=borrowedPage();
+ else if(page==="overdue-equipment")c.innerHTML=adminOverduePage();
+ else if(page==="returns")c.innerHTML=returnsPage();
+ else if(page==="activity-logs")c.innerHTML=logsPage();
+ else if(page==="settings")c.innerHTML=settingsPage();
+}
+
+function userDashboard(u){
+ const mine=db.requests.filter(r=>r.userId===u.id), overdue=mine.filter(r=>r.status==="OVERDUE"), active=mine.filter(r=>["APPROVED","BORROWED","OVERDUE"].includes(r.status));
+ return title("Student Dashboard","Welcome back, "+esc(u.name)+". Here is your equipment activity for October 5, 2026.")+
+ `<div class="grid stats"><div class="stat"><span class="label">Active Borrowings</span><strong>${active.length}</strong><small>Currently with you</small></div><div class="stat"><span class="label">Pending Requests</span><strong>${mine.filter(r=>r.status==="PENDING").length}</strong><small>Awaiting review</small></div><div class="stat"><span class="label">Overdue</span><strong class="${overdue.length?'danger':''}">${overdue.length}</strong><small>Needs attention</small></div><div class="stat"><span class="label">Total History</span><strong>${db.history.filter(h=>h.userId===u.id).length+mine.filter(r=>r.status==="RETURNED").length}</strong><small>Completed transactions</small></div></div>
+ ${overdue.length?`<div class="section"><div class="overdue"><div style="font-size:30px">△</div><div><b class="danger">Immediate action required</b><h2>${overdue.length} equipment item${overdue.length>1?"s are":" is"} overdue</h2><p>Please return overdue equipment to the campus equipment office.</p></div><button class="btn danger" onclick="go('overdue')">View overdue</button></div></div>`:""}
+ <div class="section"><div class="section-head"><div><h2>Recommended equipment</h2><p>Available resources you can request.</p></div><button class="btn secondary" onclick="go('equipment')">View all</button></div><div class="grid cards">${db.equipment.filter(e=>e.status==="AVAILABLE").slice(0,3).map(e=>equipmentCard(e)).join("")}</div></div>`
+}
+function adminDashboard(){
+ const total=db.equipment.length,avail=db.equipment.filter(e=>e.status==="AVAILABLE").length,borrowed=db.requests.filter(r=>["APPROVED","BORROWED","OVERDUE"].includes(r.status)).length,pending=db.requests.filter(r=>r.status==="PENDING").length,over=overdueRequests().length;
+ return title("Admin Dashboard","Equipment operations overview for October 5, 2026.",`<button class="btn" onclick="openAddEquipment()">+ Add Equipment</button>`)+
+ `<div class="grid stats"><div class="stat"><span class="label">Total Equipment</span><strong>${total}</strong><small>Campus resources</small></div><div class="stat"><span class="label">Available</span><strong>${avail}</strong><small>${Math.round(avail/total*100)}% of inventory</small></div><div class="stat"><span class="label">Currently Borrowed</span><strong>${borrowed}</strong><small>Across campus users</small></div><div class="stat"><span class="label">Pending Requests</span><strong>${pending}</strong><small>Needs review</small></div><div class="stat"><span class="label">Overdue</span><strong class="danger">${over}</strong><small>Needs attention</small></div><div class="stat"><span class="label">Returned</span><strong>${db.history.length}</strong><small>Completed records</small></div></div>
+ <div class="section"><div class="section-head"><div><h2>Recent borrowing requests</h2><p>Review the latest requests from campus users.</p></div><button class="btn secondary" onclick="go('borrow-requests')">View all</button></div>${requestTable(db.requests.slice().reverse().slice(0,5))}</div>`
+}
+function equipmentCard(e){
+ return `<div class="equipment-card"><div class="thumb">${e.icon}</div><div class="equipment-body"><span style="font-size:11px;color:#667085">${esc(e.category)}</span><h3>${esc(e.name)}</h3><p>${esc(e.description)}</p>${badge(e.status)}<div class="actions"><button class="btn secondary" onclick="go('detail:${e.id}')">View Details</button>${e.status==="AVAILABLE"?`<button class="btn" onclick="go('request:${e.id}')">Borrow</button>`:""}</div></div></div>`
+}
+function equipmentPage(admin){
+ let list=db.equipment;
+ return title(admin?"Equipment Management":"Equipment","Browse and manage campus equipment.",admin?`<button class="btn" onclick="openAddEquipment()">+ Add Equipment</button>`:"")+
+ `<div class="filterbar"><input id="eqSearch" class="search" placeholder="Search equipment…" oninput="filterEquipment()"><select id="eqCat" onchange="filterEquipment()"><option>All categories</option>${[...new Set(list.map(e=>e.category))].map(x=>`<option>${esc(x)}</option>`).join("")}</select><select id="eqStatus" onchange="filterEquipment()"><option>All statuses</option><option>AVAILABLE</option><option>BORROWED</option><option>UNAVAILABLE</option></select></div><div id="eqGrid" class="grid cards">${list.map(e=>equipmentCardAdmin(e,admin)).join("")}</div>`
+}
+function equipmentCardAdmin(e,admin){
+ return `<div class="equipment-card"><div class="thumb">${e.icon}</div><div class="equipment-body"><span style="font-size:11px;color:#667085">${esc(e.category)}</span><h3>${esc(e.name)}</h3><p>${esc(e.description)}</p>${badge(e.status)}<div class="actions"><button class="btn secondary" onclick="go('detail:${e.id}')">View</button>${admin?`<button class="btn ghost" onclick="editEquipment('${e.id}')">Edit</button>`:""}</div></div></div>`
+}
+function filterEquipment(){
+ const q=document.getElementById("eqSearch").value.toLowerCase(),cat=document.getElementById("eqCat").value,st=document.getElementById("eqStatus").value;
+ document.getElementById("eqGrid").innerHTML=db.equipment.filter(e=>(e.name+e.id+e.category).toLowerCase().includes(q)&&(cat==="All categories"||e.category===cat)&&(st==="All statuses"||e.status===st)).map(e=>equipmentCardAdmin(e,currentUser().role==="ADMIN")).join("")
+}
+function detailPage(id){
+ const e=db.equipment.find(x=>x.id===id)||db.equipment[0];
+ return `<button class="text-btn" onclick="go('equipment')">← Back to equipment</button><div style="height:14px"></div><div class="detail"><div class="detail-img">${e.icon}</div><div class="detail-info"><span style="font-size:11px;color:#667085;text-transform:uppercase">${esc(e.category)}</span><h1>${esc(e.name)}</h1><p>${e.id}</p><p>${esc(e.description)}</p><div class="specs"><div><span>Equipment ID</span><b>${e.id}</b></div><div><span>Category</span><b>${esc(e.category)}</b></div><div><span>Condition</span><b>${esc(e.condition)}</b></div><div><span>Availability</span><b>${e.status==="AVAILABLE"?"Ready to borrow":"Currently unavailable"}</b></div></div>${badge(e.status)}<div style="margin-top:22px">${e.status==="AVAILABLE"?`<button class="btn" onclick="go('request:${e.id}')">Request to Borrow</button>`:"<button class='btn secondary' disabled>Not available</button>"}</div></div></div>`
+}
+function requestPage(id,u){
+ const e=db.equipment.find(x=>x.id===id);if(!e)return "";
+ return title("Borrowing Request","Provide the details below. Fields marked with * are required.")+
+ `<div class="form-layout"><form class="form-card" id="borrowForm"><h2>Request details</h2><p>Tell us when and why you need this equipment.</p><div class="field"><span>Equipment</span><div class="readonly">${esc(e.name)} <small>${e.id}</small></div></div><div class="field"><span>Purpose of Borrowing *</span><textarea name="purpose" required placeholder="e.g. Class presentation, organization seminar"></textarea></div><div class="field"><span>Borrow Date *</span><input name="borrow" type="date" value="2026-10-07" required></div><div class="field"><span>Return / Due Date *</span><input name="due" type="date" value="2026-10-10" required></div><button class="btn" type="submit">Submit Request</button></form><div class="summary"><h3>Request summary</h3><p><b>${esc(e.name)}</b></p><p>${esc(e.category)} · ${e.condition} condition</p><hr><p style="font-size:12px;color:#667085">Requests are reviewed by the Campus Equipment Office, usually within one business day.</p></div></div>`;
+}
+function myBorrowings(u){
+ const rows=db.requests.filter(r=>r.userId===u.id);
+ return title("My Borrowings","Track your pending, approved, and returned equipment requests.")+
+ `<div class="section">${rows.length?`<div class="table-wrap"><table class="table"><thead><tr><th>Request ID</th><th>Equipment</th><th>Purpose</th><th>Borrow Date</th><th>Due Date</th><th>Status</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.id}</td><td><b>${esc(r.equipment)}</b></td><td>${esc(r.purpose)}</td><td>${date(r.borrow)}</td><td>${date(r.due)}</td><td>${badge(r.status)}</td></tr>`).join("")}</tbody></table></div>`:"<p>No borrowing requests yet.</p>"}</div>`
+}
+function userOverdue(u){
+ const rows=overdueRequests().filter(r=>r.userId===u.id);
+ return title("Overdue Equipment","Review equipment requiring your immediate attention.")+
+ (rows.length?rows.map(r=>`<div class="section overdue"><div style="font-size:32px">△</div><div><b class="danger">Immediate action required</b><h2>${esc(r.equipment)}</h2><p>Equipment ID: ${r.equipmentId} · Due ${date(r.due)}</p><p>This equipment is overdue. Please return it to the campus equipment office as soon as possible.</p></div></div>`).join(""):"<div class='section'><h2>No overdue equipment</h2><p>You are currently up to date.</p></div>")
+}
+function historyPage(u){
+ const rows=u.role==="ADMIN"?db.history:db.history.filter(h=>h.userId===u.id);
+ return title("Borrowing History",u.role==="ADMIN"?"Review all completed campus transactions.":"A record of your completed equipment transactions.",u.role==="ADMIN"?`<button class="btn secondary" onclick="exportHistory()">Export report</button>`:"")+
+ `<div class="section">${rows.length?`<div class="table-wrap"><table class="table"><thead><tr><th>Transaction</th><th>Borrower</th><th>Equipment</th><th>Borrow Date</th><th>Due Date</th><th>Return Date</th><th>Condition</th><th>Status</th></tr></thead><tbody>${rows.map(h=>`<tr><td>${h.id}</td><td>${esc(h.borrower)}</td><td>${esc(h.equipment)}</td><td>${date(h.borrow)}</td><td>${date(h.due)}</td><td>${date(h.returned)}</td><td>${h.condition}</td><td>${badge(h.status)}</td></tr>`).join("")}</tbody></table></div>`:"<p>No history records found.</p>"}</div>`
+}
+function profilePage(u){
+ return title("My Profile","Manage your campus account and contact information.")+
+ `<div class="profile"><div class="section profile-card"><div class="profile-big">${initials(u.name)}</div><h2>${esc(u.name)}</h2><p>BS Information Technology</p>${badge("APPROVED")}<hr><p>Member since<br><b>August 2025</b></p><p>Total borrowings<br><b>${db.requests.filter(r=>r.userId===u.id).length+db.history.filter(h=>h.userId===u.id).length}</b></p><button class="btn danger" onclick="logout()">Logout</button></div><div class="section"><div class="section-head"><div><h2>Personal information</h2><p>Your official campus account details.</p></div><button class="btn secondary" onclick="editProfile()">Edit Profile</button></div><div class="info-grid"><div><span>Full Name</span><b>${esc(u.name)}</b></div><div><span>Student ID</span><b>${esc(u.studentId)}</b></div><div><span>Email Address</span><b>${esc(u.email)}</b></div><div><span>Phone Number</span><b>${esc(u.phone||"Not provided")}</b></div><div><span>Account Status</span><b>${u.status}</b></div><div><span>Role</span><b>USER / BORROWER</b></div></div></div></div>`
+}
+function requestTable(rows){
+ return `<div class="table-wrap"><table class="table"><thead><tr><th>Request ID</th><th>Borrower</th><th>Equipment</th><th>Purpose</th><th>Borrow Date</th><th>Due Date</th><th>Status</th><th>Action</th></tr></thead><tbody>${rows.map(r=>`<tr><td><b>${r.id}</b></td><td>${esc(r.borrower)}</td><td>${esc(r.equipment)}</td><td>${esc(r.purpose)}</td><td>${date(r.borrow)}</td><td>${date(r.due)}</td><td>${badge(r.status)}</td><td>${r.status==="PENDING"?`<button class="btn" onclick="decide('${r.id}','APPROVED')">Approve</button> <button class="btn secondary" onclick="decide('${r.id}','REJECTED')">Reject</button>`:"<button class='btn ghost'>View</button>"}</td></tr>`).join("")}</tbody></table></div>`
+}
+function requestsPage(){
+ return title("Borrowing Requests","Review, approve, or reject equipment requests.")+`<div class="tabs"><button class="active">All</button></div><div class="section">${requestTable(db.requests)}</div>`
+}
+function usersPage(){
+ return title("User Management","Manage borrower accounts, roles, and access status.")+
+ `<div class="section"><div class="filterbar"><input class="search" id="userSearch" placeholder="Search users…" oninput="filterUsers()"><select><option>All roles</option></select><select><option>All statuses</option></select></div><div id="userTable">${userTable(db.users)}</div></div>`
+}
+function userTable(rows){return `<div class="table-wrap"><table class="table"><thead><tr><th>User ID</th><th>Name</th><th>Student ID</th><th>Email</th><th>Role</th><th>Status</th><th>Action</th></tr></thead><tbody>${rows.map(u=>`<tr><td>${u.id}</td><td><b>${esc(u.name)}</b></td><td>${esc(u.studentId)}</td><td>${esc(u.email)}</td><td>${u.role}</td><td>${u.status}</td><td><button class="btn ghost" onclick="toggleUser('${u.id}')">${u.status==="Active"?"Deactivate":"Activate"}</button></td></tr>`).join("")}</tbody></table></div>`}
+function filterUsers(){const q=document.getElementById("userSearch").value.toLowerCase();document.getElementById("userTable").innerHTML=userTable(db.users.filter(u=>(u.name+u.email+u.studentId).toLowerCase().includes(q)))}
+function borrowedPage(){
+ const rows=db.requests.filter(r=>["APPROVED","BORROWED","OVERDUE"].includes(r.status));
+ return title("Currently Borrowed Equipment","Monitor active loans and upcoming return deadlines.")+`<div class="notice"><div>◷</div><div><b>Automatic deadline monitoring is active</b><p>Status changes to OVERDUE when the current date passes the due date and no return is recorded.</p></div></div><div class="section">${rows.length?requestTable(rows):"<p>No equipment is currently borrowed.</p>"}</div>`
+}
+function adminOverduePage(){
+ const rows=overdueRequests();
+ return title("Overdue Equipment","Automatically detected items that have passed their return date.")+`<div class="section overdue"><div style="font-size:30px">△</div><div><b class="danger">Total overdue</b><h2>${rows.length} equipment item${rows.length===1?"":"s"} require attention.</h2><p>Contact borrowers and coordinate returns promptly.</p></div></div><div class="section">${rows.length?requestTable(rows):"<p>No overdue equipment.</p>"}</div>`
+}
+function returnsPage(){
+ const rows=db.requests.filter(r=>["APPROVED","BORROWED","OVERDUE"].includes(r.status));
+ return title("Equipment Returns","Inspect returned equipment and complete active transactions.")+`<div class="section">${rows.length?`<div class="table-wrap"><table class="table"><thead><tr><th>Equipment</th><th>Borrower</th><th>Due Date</th><th>Status</th><th>Action</th></tr></thead><tbody>${rows.map(r=>`<tr><td><b>${esc(r.equipment)}</b></td><td>${esc(r.borrower)}</td><td>${date(r.due)}</td><td>${badge(r.status)}</td><td><button class="btn" onclick="processReturn('${r.id}')">Process Return</button></td></tr>`).join("")}</tbody></table></div>`:"<p>No active returns.</p>"}</div>`
+}
+function logsPage(){
+ return title("Activity Logs","An auditable record of user, administrator, and system activity.")+`<div class="section"><div class="table-wrap"><table class="table"><thead><tr><th>Date / Time</th><th>User</th><th>Role</th><th>Action</th><th>Description</th></tr></thead><tbody>${db.logs.map(l=>`<tr><td>${esc(l[0])}</td><td><b>${esc(l[1])}</b></td><td>${esc(l[2])}</td><td>${esc(l[3])}</td><td>${esc(l[4])}</td></tr>`).join("")}</tbody></table></div></div>`
+}
+function settingsPage(){
+ return title("System Settings","Configure borrowing policies and system notifications.")+
+ `<div class="settings"><div class="section"><h2>Borrowing policies</h2><p>Set the standard rules applied to new requests.</p><div class="field"><span>Maximum borrowing period (days)</span><input id="maxDays" type="number" value="${db.settings.maxDays}"></div><div class="field"><span>Maximum active items per user</span><input id="maxItems" type="number" value="${db.settings.maxItems}"></div><label class="toggle"><div><b>Automatic overdue detection</b><span>Compare due dates against the current date.</span></div><input id="autoOverdue" type="checkbox" ${db.settings.autoOverdue?"checked":""}></label><button class="btn" onclick="saveSettings()">Save Changes</button></div><div class="section"><h2>Notifications</h2>${["Request approval emails","Upcoming due date reminders","Overdue alerts","Return confirmations"].map(x=>`<label class="toggle"><div><b>${x}</b><span>Enabled for applicable campus users</span></div><input type="checkbox" checked></label>`).join("")}</div></div>`
+}
+
+function modal(title,body,actions){document.getElementById("modalRoot")?.remove();const d=document.createElement("div");d.id="modalRoot";d.className="modal-back";d.innerHTML=`<div class="modal"><div class="modal-head"><h2>${title}</h2><button class="close" onclick="closeModal()">×</button></div>${body}<div class="modal-actions">${actions}</div></div>`;document.body.appendChild(d)}
+function closeModal(){document.getElementById("modalRoot")?.remove()}
+function openAddEquipment(){
+ modal("Add equipment",`<form id="addEq"><div class="field"><span>Name</span><input name="name" required></div><div class="field"><span>Category</span><input name="category" required></div><div class="field"><span>Condition</span><select name="condition"><option>Good</option><option>Fair</option><option>Poor</option></select></div><div class="field"><span>Description</span><textarea name="description"></textarea></div>`,
+ `<button class="btn secondary" type="button" onclick="closeModal()">Cancel</button><button class="btn" type="submit">Add Equipment</button></form>`);
+ document.getElementById("addEq").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);db.equipment.push({id:"EQ-"+String(Date.now()).slice(-4),name:f.get("name"),category:f.get("category"),condition:f.get("condition"),status:"AVAILABLE",icon:"▣",description:f.get("description")||"Campus equipment."});save();closeModal();render();notify("Equipment added successfully.")};
+}
+function editEquipment(id){
+ const e=db.equipment.find(x=>x.id===id);
+ modal("Edit equipment",`<form id="editEq"><div class="field"><span>Name</span><input name="name" value="${esc(e.name)}" required></div><div class="field"><span>Category</span><input name="category" value="${esc(e.category)}" required></div><div class="field"><span>Status</span><select name="status">${["AVAILABLE","BORROWED","UNAVAILABLE"].map(s=>`<option ${e.status===s?"selected":""}>${s}</option>`).join("")}</select></div>`,
+ `<button class="btn secondary" type="button" onclick="closeModal()">Cancel</button><button class="btn" type="submit">Save</button></form>`);
+ document.getElementById("editEq").onsubmit=x=>{x.preventDefault();const f=new FormData(x.target);Object.assign(e,{name:f.get("name"),category:f.get("category"),status:f.get("status")});save();closeModal();render();notify("Equipment updated.")};
+}
+function decide(id,status){
+ const r=db.requests.find(x=>x.id===id);if(!r)return;
+ if(status==="APPROVED"){r.status="APPROVED";const e=db.equipment.find(x=>x.id===r.equipmentId);if(e)e.status="BORROWED"}
+ else r.status="REJECTED";
+ db.logs.unshift(["Oct 5, 2026",currentUser().name,"ADMIN",status==="APPROVED"?"Request Approved":"Request Rejected",`${status==="APPROVED"?"Approved":"Rejected"} request #${id}`]);save();render();notify(`Borrowing request ${status==="APPROVED"?"approved":"rejected"}.`)
+}
+function processReturn(id){
+ const r=db.requests.find(x=>x.id===id),e=db.equipment.find(x=>x.id===r.equipmentId);if(!r)return;
+ modal("Process equipment return",`<p><b>${esc(r.equipment)}</b></p><p>Borrower: ${esc(r.borrower)}</p><div class="field"><span>Returned condition</span><select id="returnCondition"><option>Good</option><option>Fair</option><option>Damaged</option><option>Lost</option></select></div>`,
+ `<button class="btn secondary" onclick="closeModal()">Cancel</button><button class="btn" onclick="confirmReturn('${id}')">Confirm Return</button>`)
+}
+function confirmReturn(id){
+ const r=db.requests.find(x=>x.id===id),e=db.equipment.find(x=>x.id===r.equipmentId),cond=document.getElementById("returnCondition").value;
+ r.status="RETURNED";if(e)e.status="AVAILABLE";db.history.push({id:"TX-"+String(Date.now()).slice(-5),userId:r.userId,borrower:r.borrower,equipment:r.equipment,equipmentId:r.equipmentId,borrow:r.borrow,due:r.due,returned:"2026-10-05",condition:cond,status:"RETURNED"});db.logs.unshift(["Oct 5, 2026",currentUser().name,"ADMIN","Return Processed",`Returned ${r.equipment}`]);save();closeModal();render();notify("Equipment successfully returned.")
+}
+function editProfile(){
+ const u=currentUser();
+ modal("Edit profile",`<form id="profileForm"><div class="field"><span>Full Name</span><input name="name" value="${esc(u.name)}" required></div><div class="field"><span>Phone Number</span><input name="phone" value="${esc(u.phone||"")}"></div>`,
+ `<button class="btn secondary" type="button" onclick="closeModal()">Cancel</button><button class="btn" type="submit">Save</button></form>`);
+ document.getElementById("profileForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);u.name=f.get("name");u.phone=f.get("phone");save();closeModal();render();notify("Profile updated.")};
+}
+function toggleUser(id){const u=db.users.find(x=>x.id===id);u.status=u.status==="Active"?"Inactive":"Active";save();render();notify("Account status updated.")}
+function saveSettings(){db.settings.maxDays=Number(document.getElementById("maxDays").value)||7;db.settings.maxItems=Number(document.getElementById("maxItems").value)||3;db.settings.autoOverdue=document.getElementById("autoOverdue").checked;save();notify("Settings saved.")}
+function exportHistory(){const rows=[["Transaction","Borrower","Equipment","Borrow Date","Due Date","Return Date","Condition","Status"],...db.history.map(h=>[h.id,h.borrower,h.equipment,h.borrow,h.due,h.returned,h.condition,h.status])];const csv=rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="equipcampus-history.csv";a.click();URL.revokeObjectURL(a.href)}
+
+document.addEventListener("submit",e=>{
+ if(e.target.id==="borrowForm"){e.preventDefault();const f=new FormData(e.target),id=page.split(":")[1],eq=db.equipment.find(x=>x.id===id),u=currentUser();if(!eq||eq.status!=="AVAILABLE")return notify("This equipment is no longer available.");const active=db.requests.filter(r=>r.userId===u.id&&["PENDING","APPROVED","BORROWED","OVERDUE"].includes(r.status)).length;if(active>=db.settings.maxItems)return notify("You have reached the maximum active borrowing limit.");db.requests.push({id:"BR-"+String(Date.now()).slice(-4),userId:u.id,borrower:u.name,equipmentId:eq.id,equipment:eq.name,purpose:f.get("purpose"),borrow:f.get("borrow"),due:f.get("due"),status:"PENDING",created:"2026-10-05"});db.logs.unshift(["Oct 5, 2026",u.name,"USER","Borrow Request",`Requested ${eq.name}`]);save();go("my-borrowings");notify("Borrowing request submitted successfully.")}
+});
+
+function refreshOverdue(){
+ const today=new Date("2026-10-05T23:59:59");
+ db.requests.forEach(r=>{if(["APPROVED","BORROWED"].includes(r.status)&&new Date(r.due+"T23:59:59")<today)r.status="OVERDUE"});
+ save()
+}
+refreshOverdue();render();
+</script>
+<div id="modalRoot"></div>
+</body>
+</html>
